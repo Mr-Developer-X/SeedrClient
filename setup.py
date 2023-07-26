@@ -12,14 +12,14 @@ with open("./src/seedr_client/__init__.py") as fp:
     exec(fp.read(), VERSION)
 
 setup(
-    name="seedr_client",
+    name="seedr-client",
     version=VERSION.get("__version__", "0.0.0"),
     author="Mr Developer X",
     author_email="139059229+Mr-Developer-X@users.noreply.github.com",
     description="A python library to interface with Seedr",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/Mr-Developer-X/seedr_client",
+    url="https://github.com/Mr-Developer-X/seedr-client",
     package_dir={"": "src"},
     packages=find_packages(where="src", exclude=["tests"]),
     install_requires=[

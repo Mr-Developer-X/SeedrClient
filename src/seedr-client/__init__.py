@@ -1,2 +1,2 @@
-name = "seedr_client"
+name = "seedr-client"
 __version__ = "0.1.0"
