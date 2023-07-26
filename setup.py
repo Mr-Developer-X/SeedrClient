@@ -25,7 +25,7 @@ setup(
     install_requires=[
         "setuptools>=45.0",
         "aria2p>=0.11.0",
-        "requests>=2.27.0",
+        "requests>=2.30.0",  # Moved to newer version to jump over vulnerability in requests 2.29.0
         "torrentool>=1.2.0",
         "ih2torrent>=0.1.17;platform_system=='Linux'",
         "win-ih2torrent>=0.2.0;platform_system=='Windows'"
