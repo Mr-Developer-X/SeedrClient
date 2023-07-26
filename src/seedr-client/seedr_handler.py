@@ -47,20 +47,23 @@ class SeedrHandler:
         return any(fail_resp in response_text for fail_resp in ["invalid_token", "expired_token"])
 
     @staticmethod
-    def byte_to_gb(byte):
+    def bytes_to_mb_gb(byte):
         """
-        A simple function that converts Bytes to Gigabytes
+        A simple function that converts Bytes to Megabytes if value
+        is less than 1 Gigabyte else returns value in Gigabytes
 
         :param byte: The value in Bytes to be converted
         :type byte: int
-        :return: The converted value in Gigabytes
-        :rtype: int
+        :return: The converted value in MB or GB based on logic
+        :rtype: str
         """
-        gb = byte / (1024 ** 3)
-        return gb
+        mb = byte / (1024 ** 2)
+        if mb >= 1024:
+            gb = mb / 1024
+            return f"{round(gb, 2)} GB"
+        return f"{round(mb, 2)} MB"
 
-    @staticmethod
-    def list_contents(response_json):
+    def list_contents(self, response_json):
         """
         This method takes the response provided by the api request and sanitizes it,
         to only returns the relevant details pertaining to the folder structure
@@ -74,14 +77,14 @@ class SeedrHandler:
                 {
                     "folder_id": folder["id"],
                     "folder_name": folder["name"],
-                    "size": folder["size"]
+                    "size": self.bytes_to_mb_gb(folder["size"])
                 } for folder in response_json["folders"]
             ],
             "files": [
                 {
                     "folder_file_id": file["folder_file_id"],
                     "file_name": file["name"],
-                    "size": file["size"],
+                    "size": self.bytes_to_mb_gb(file["size"]),
                     "folder_path": response_json["fullname"]
                 } for file in response_json["files"]
             ]
@@ -183,8 +186,8 @@ class SeedrHandler:
             response_json = json.loads(response.text)
             drive = {
                 "space": {
-                    "total": str(round(self.byte_to_gb(response_json["space_max"]), 2)) + " GB",
-                    "used": str(round(self.byte_to_gb(response_json["space_used"]), 2)) + " GB"
+                    "total": self.bytes_to_mb_gb(response_json["space_max"]),
+                    "used": self.bytes_to_mb_gb(response_json["space_used"])
                 },
                 "parent_folder_id": response_json["folder_id"] if response_json["parent"] == -1 else None,
                 "torrents": [
