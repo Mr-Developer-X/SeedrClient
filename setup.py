@@ -2,18 +2,11 @@
 from setuptools import setup, find_packages
 
 
-VERSION = {}
-
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-with open("./src/seedr_client/__init__.py") as fp:
-    # pylint: disable=W0122
-    exec(fp.read(), VERSION)
-
 setup(
-    name="seedr-client",
-    version=VERSION.get("__version__", "0.0.0"),
+    name="SeedrClient",
     author="Mr Developer X",
     author_email="139059229+Mr-Developer-X@users.noreply.github.com",
     description="A python library to interface with Seedr",
@@ -28,11 +21,9 @@ setup(
         "requests>=2.30.0",  # Moved to newer version to jump over vulnerability in requests 2.29.0
         "torrentool>=1.2.0",
         "ih2torrent>=0.1.17;platform_system=='Linux'",
-        "win-ih2torrent>=0.2.0;platform_system=='Windows'"
+        "win-ih2torrent>=0.2.0;platform_system=='Windows'",
     ],
-    keywords=[
-        "seedr", "bittorrent", "torrent", "magnet", "seedr api", "seedbox"
-    ],
+    keywords=["seedr", "bittorrent", "torrent", "magnet", "seedr api", "seedbox"],
     classifiers=[
         "Topic :: Utilities",
         "Programming Language :: Python :: 3 :: Only",
