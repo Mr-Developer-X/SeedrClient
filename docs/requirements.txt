@@ -1,0 +1,6 @@
+# Defining the exact version will make sure things don't break
+sphinx==7.1.0
+furo== 2023.7.26
+aria2p==0.11.0
+requests==2.30.0
+torrentool==1.2.0
