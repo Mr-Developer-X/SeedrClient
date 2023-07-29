@@ -1,0 +1,585 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="Welcome to SeedrClient’s documentation!" href="index.html" />
+
+    <!-- Generated with Sphinx 7.1.0 and Furo 2023.07.26 -->
+        <title>seedr_client package - SeedrClient 0.1.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=362ab14a" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">SeedrClient 0.1.2 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">SeedrClient 0.1.2 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">seedr_client package</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="seedr-client-package">
+<h1>seedr_client package<a class="headerlink" href="#seedr-client-package" title="Permalink to this heading">#</a></h1>
+<section id="module-seedr_client">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-seedr_client" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="seedr_client.SeedrHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seedr_client.</span></span><span class="sig-name descname"><span class="pre">SeedrHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access_token</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aria2c_secret</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">download_directory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/seedr_client/seedr_handler.html#SeedrHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seedr_client.SeedrHandler" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="seedr_client.SeedrHandler.add_torrent">
+<span class="sig-name descname"><span class="pre">add_torrent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">torrent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wishlist_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/seedr_client/seedr_handler.html#SeedrHandler.add_torrent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seedr_client.SeedrHandler.add_torrent" title="Permalink to this definition">#</a></dt>
+<dd><p>This function allows you to pass either torrent file or magnet uri or a wishlist id, to start downloading
+by Seedr.</p>
+<p>Note: If magnet uri is passed instead of a torrent file which is the preferred method, and if the peers in the
+torrent is lower than 3 or if the torrent is completely dead then this function might not be able to add the
+torrent due to the underlying logic which requires the meta info of the torrent. This is a drawback of this
+approach as this helps avoid wasting time checking if there is enough storage space, but can’t use the Seedr’s
+cache, which works even if there is no seeders. If there is enough requests to correct this approach I will add
+a timeout logic to the method in next iteration. For now try supplying torrents file instead of the magnet uri.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>torrent</strong> (<em>str</em>) – The torrent file or magnet uri that you want to add to be leeched/downloaded</p></li>
+<li><p><strong>wishlist_id</strong> (<em>int</em>) – The wishlist id that you want to add from your Seedr wishlist</p></li>
+<li><p><strong>folder_id</strong> (<em>int</em>) – The folder you want the torrent to be downloaded to. Defaults to parent.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>If successful returns the name and ID of the torrent.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seedr_client.SeedrHandler.bytes_to_mb_gb">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bytes_to_mb_gb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">byte</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/seedr_client/seedr_handler.html#SeedrHandler.bytes_to_mb_gb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seedr_client.SeedrHandler.bytes_to_mb_gb" title="Permalink to this definition">#</a></dt>
+<dd><p>A simple function that converts Bytes to Megabytes if value
+is less than 1 Gigabyte else returns value in Gigabytes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>byte</strong> (<em>int</em>) – The value in Bytes to be converted</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The converted value in MB or GB based on logic</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seedr_client.SeedrHandler.contains_bad_token">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">contains_bad_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response_text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/seedr_client/seedr_handler.html#SeedrHandler.contains_bad_token"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seedr_client.SeedrHandler.contains_bad_token" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seedr_client.SeedrHandler.delete_all">
+<span class="sig-name descname"><span class="pre">delete_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/seedr_client/seedr_handler.html#SeedrHandler.delete_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seedr_client.SeedrHandler.delete_all" title="Permalink to this definition">#</a></dt>
+<dd><p>This method deletes all the content within the drive, whether it downloaded
+to the drive or being downloaded.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns True if the method clears the whole drive successfully, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seedr_client.SeedrHandler.delete_file">
+<span class="sig-name descname"><span class="pre">delete_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_file_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/seedr_client/seedr_handler.html#SeedrHandler.delete_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seedr_client.SeedrHandler.delete_file" title="Permalink to this definition">#</a></dt>
+<dd><p>This method deletes the file associated with the id that is passed and returns True on success</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>folder_file_id</strong> (<em>int</em>) – The id of the file you wish to delete</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns True or False based on success</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seedr_client.SeedrHandler.delete_folder">
+<span class="sig-name descname"><span class="pre">delete_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/seedr_client/seedr_handler.html#SeedrHandler.delete_folder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seedr_client.SeedrHandler.delete_folder" title="Permalink to this definition">#</a></dt>
+<dd><p>This method deletes the folder associated with the id that is passed and returns True on success</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>folder_id</strong> (<em>int</em>) – The id of the folder you wish to delete</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns True or False based on success</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seedr_client.SeedrHandler.delete_torrent">
+<span class="sig-name descname"><span class="pre">delete_torrent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">torrent_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/seedr_client/seedr_handler.html#SeedrHandler.delete_torrent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seedr_client.SeedrHandler.delete_torrent" title="Permalink to this definition">#</a></dt>
+<dd><p>This method deletes any active torrent associated with the id that is passed and returns True on success</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>torrent_id</strong> (<em>int</em>) – The id of the active torrent you wish to delete</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns True or False based on success</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seedr_client.SeedrHandler.download_folder">
+<span class="sig-name descname"><span class="pre">download_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">builtin_downloader</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/seedr_client/seedr_handler.html#SeedrHandler.download_folder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seedr_client.SeedrHandler.download_folder" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seedr_client.SeedrHandler.get_drive">
+<span class="sig-name descname"><span class="pre">get_drive</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/seedr_client/seedr_handler.html#SeedrHandler.get_drive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seedr_client.SeedrHandler.get_drive" title="Permalink to this definition">#</a></dt>
+<dd><p>Gets details about the drive’s space, active torrents, and all downloaded files and folders
+Note: This is the same as the get_folder method except seedr api does not ask for a folder id,
+additionally we are able top display a few additional details, including active torrents</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing, available and used drive space, active torrents and its details, downloaded
+folders and files and their details</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seedr_client.SeedrHandler.get_file">
+<span class="sig-name descname"><span class="pre">get_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_file_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/seedr_client/seedr_handler.html#SeedrHandler.get_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seedr_client.SeedrHandler.get_file" title="Permalink to this definition">#</a></dt>
+<dd><p>This method returns the name and the download url associated with the file id that is passed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>folder_file_id</strong> (<em>int</em>) – The unique id associated with the file you need the info about</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing file name and download url</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seedr_client.SeedrHandler.get_folder">
+<span class="sig-name descname"><span class="pre">get_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/seedr_client/seedr_handler.html#SeedrHandler.get_folder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seedr_client.SeedrHandler.get_folder" title="Permalink to this definition">#</a></dt>
+<dd><p>This method lists all the content of the folder as a dictionary associated with
+the folder id that is passed if it exists</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>folder_id</strong> (<em>int</em>) – The unique id associated with the folder that you need the info about</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary contains a list of all files and folders in the associated folder</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seedr_client.SeedrHandler.get_token">
+<span class="sig-name descname"><span class="pre">get_token</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/seedr_client/seedr_handler.html#SeedrHandler.get_token"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seedr_client.SeedrHandler.get_token" title="Permalink to this definition">#</a></dt>
+<dd><p>Gets the access token if email and password is passed during init, else if token itself was provided instead
+verifies that the access token is valid and if an error occurs during the previous process or if none of the
+required details are passed during init of client raises an error.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seedr_client.SeedrHandler.is_login_success">
+<span class="sig-name descname"><span class="pre">is_login_success</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/seedr_client/seedr_handler.html#SeedrHandler.is_login_success"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seedr_client.SeedrHandler.is_login_success" title="Permalink to this definition">#</a></dt>
+<dd><p>Checks if the access token is valid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns True if the token is valid, False if it isn’t</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seedr_client.SeedrHandler.is_op_success">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_op_success</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response_text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/seedr_client/seedr_handler.html#SeedrHandler.is_op_success"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seedr_client.SeedrHandler.is_op_success" title="Permalink to this definition">#</a></dt>
+<dd><p>Checks if there is a success code in the response provided by the api call and returns the appropriate boolean
+:param response_text: The response from the api call in text format
+:type response_text: str
+:return: Returns true if success, false otherwise
+:rtype: bool</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seedr_client.SeedrHandler.is_request_failed">
+<span class="sig-name descname"><span class="pre">is_request_failed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response_text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">requested_on</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/seedr_client/seedr_handler.html#SeedrHandler.is_request_failed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seedr_client.SeedrHandler.is_request_failed" title="Permalink to this definition">#</a></dt>
+<dd><p>Checks for any failed codes in the response and if there is any, then it raises
+the appropriate error code with detail, else returns false</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>response_text</strong> (<em>str</em>) – The text response received by Seedr api to the request made by the previous method</p></li>
+<li><p><strong>requested_on</strong> (<em>str</em>) – A string that is either “file” or “folder” based on what kinda file system operations was
+going on in the previous method</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns False if no fail code</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seedr_client.SeedrHandler.list_contents">
+<span class="sig-name descname"><span class="pre">list_contents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response_json</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/seedr_client/seedr_handler.html#SeedrHandler.list_contents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seedr_client.SeedrHandler.list_contents" title="Permalink to this definition">#</a></dt>
+<dd><p>This method takes the response provided by the api request and sanitizes it,
+to only returns the relevant details pertaining to the folder structure
+:param response_json: The response from the api requests passed in json format
+:type response_json: dict
+:return: The folder structure of the folder pertaining to the api response
+:rtype: dict</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
+<section id="module-seedr_client.errors">
+<span id="seedr-client-errors-module"></span><h3>seedr_client.errors module<a class="headerlink" href="#module-seedr_client.errors" title="Permalink to this heading">#</a></h3>
+<dl class="py exception">
+<dt class="sig sig-object py" id="seedr_client.errors.BadLeeching">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seedr_client.errors.</span></span><span class="sig-name descname"><span class="pre">BadLeeching</span></span><a class="reference internal" href="_modules/seedr_client/errors.html#BadLeeching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seedr_client.errors.BadLeeching" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="seedr_client.errors.DriveLimit">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seedr_client.errors.</span></span><span class="sig-name descname"><span class="pre">DriveLimit</span></span><a class="reference internal" href="_modules/seedr_client/errors.html#DriveLimit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seedr_client.errors.DriveLimit" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="seedr_client.errors.InvalidLogin">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seedr_client.errors.</span></span><span class="sig-name descname"><span class="pre">InvalidLogin</span></span><a class="reference internal" href="_modules/seedr_client/errors.html#InvalidLogin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seedr_client.errors.InvalidLogin" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="seedr_client.errors.InvalidToken">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seedr_client.errors.</span></span><span class="sig-name descname"><span class="pre">InvalidToken</span></span><a class="reference internal" href="_modules/seedr_client/errors.html#InvalidToken"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seedr_client.errors.InvalidToken" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="seedr_client.errors.InvalidTorrent">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seedr_client.errors.</span></span><span class="sig-name descname"><span class="pre">InvalidTorrent</span></span><a class="reference internal" href="_modules/seedr_client/errors.html#InvalidTorrent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seedr_client.errors.InvalidTorrent" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="seedr_client.errors.LoginRequired">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seedr_client.errors.</span></span><span class="sig-name descname"><span class="pre">LoginRequired</span></span><a class="reference internal" href="_modules/seedr_client/errors.html#LoginRequired"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seedr_client.errors.LoginRequired" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          <a class="prev-page" href="index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Home</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Mr Developer X
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">seedr_client package</a><ul>
+<li><a class="reference internal" href="#module-seedr_client">Module contents</a><ul>
+<li><a class="reference internal" href="#seedr_client.SeedrHandler"><code class="docutils literal notranslate"><span class="pre">SeedrHandler</span></code></a><ul>
+<li><a class="reference internal" href="#seedr_client.SeedrHandler.add_torrent"><code class="docutils literal notranslate"><span class="pre">SeedrHandler.add_torrent()</span></code></a></li>
+<li><a class="reference internal" href="#seedr_client.SeedrHandler.bytes_to_mb_gb"><code class="docutils literal notranslate"><span class="pre">SeedrHandler.bytes_to_mb_gb()</span></code></a></li>
+<li><a class="reference internal" href="#seedr_client.SeedrHandler.contains_bad_token"><code class="docutils literal notranslate"><span class="pre">SeedrHandler.contains_bad_token()</span></code></a></li>
+<li><a class="reference internal" href="#seedr_client.SeedrHandler.delete_all"><code class="docutils literal notranslate"><span class="pre">SeedrHandler.delete_all()</span></code></a></li>
+<li><a class="reference internal" href="#seedr_client.SeedrHandler.delete_file"><code class="docutils literal notranslate"><span class="pre">SeedrHandler.delete_file()</span></code></a></li>
+<li><a class="reference internal" href="#seedr_client.SeedrHandler.delete_folder"><code class="docutils literal notranslate"><span class="pre">SeedrHandler.delete_folder()</span></code></a></li>
+<li><a class="reference internal" href="#seedr_client.SeedrHandler.delete_torrent"><code class="docutils literal notranslate"><span class="pre">SeedrHandler.delete_torrent()</span></code></a></li>
+<li><a class="reference internal" href="#seedr_client.SeedrHandler.download_folder"><code class="docutils literal notranslate"><span class="pre">SeedrHandler.download_folder()</span></code></a></li>
+<li><a class="reference internal" href="#seedr_client.SeedrHandler.get_drive"><code class="docutils literal notranslate"><span class="pre">SeedrHandler.get_drive()</span></code></a></li>
+<li><a class="reference internal" href="#seedr_client.SeedrHandler.get_file"><code class="docutils literal notranslate"><span class="pre">SeedrHandler.get_file()</span></code></a></li>
+<li><a class="reference internal" href="#seedr_client.SeedrHandler.get_folder"><code class="docutils literal notranslate"><span class="pre">SeedrHandler.get_folder()</span></code></a></li>
+<li><a class="reference internal" href="#seedr_client.SeedrHandler.get_token"><code class="docutils literal notranslate"><span class="pre">SeedrHandler.get_token()</span></code></a></li>
+<li><a class="reference internal" href="#seedr_client.SeedrHandler.is_login_success"><code class="docutils literal notranslate"><span class="pre">SeedrHandler.is_login_success()</span></code></a></li>
+<li><a class="reference internal" href="#seedr_client.SeedrHandler.is_op_success"><code class="docutils literal notranslate"><span class="pre">SeedrHandler.is_op_success()</span></code></a></li>
+<li><a class="reference internal" href="#seedr_client.SeedrHandler.is_request_failed"><code class="docutils literal notranslate"><span class="pre">SeedrHandler.is_request_failed()</span></code></a></li>
+<li><a class="reference internal" href="#seedr_client.SeedrHandler.list_contents"><code class="docutils literal notranslate"><span class="pre">SeedrHandler.list_contents()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#submodules">Submodules</a><ul>
+<li><a class="reference internal" href="#module-seedr_client.errors">seedr_client.errors module</a><ul>
+<li><a class="reference internal" href="#seedr_client.errors.BadLeeching"><code class="docutils literal notranslate"><span class="pre">BadLeeching</span></code></a></li>
+<li><a class="reference internal" href="#seedr_client.errors.DriveLimit"><code class="docutils literal notranslate"><span class="pre">DriveLimit</span></code></a></li>
+<li><a class="reference internal" href="#seedr_client.errors.InvalidLogin"><code class="docutils literal notranslate"><span class="pre">InvalidLogin</span></code></a></li>
+<li><a class="reference internal" href="#seedr_client.errors.InvalidToken"><code class="docutils literal notranslate"><span class="pre">InvalidToken</span></code></a></li>
+<li><a class="reference internal" href="#seedr_client.errors.InvalidTorrent"><code class="docutils literal notranslate"><span class="pre">InvalidTorrent</span></code></a></li>
+<li><a class="reference internal" href="#seedr_client.errors.LoginRequired"><code class="docutils literal notranslate"><span class="pre">LoginRequired</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b0099a1c"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="_static/scripts/furo.js?v=32e29ea5"></script>
+    </body>
+</html>

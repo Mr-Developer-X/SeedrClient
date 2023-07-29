@@ -1,0 +1,726 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+
+    <!-- Generated with Sphinx 7.1.0 and Furo 2023.07.26 -->
+        <title>seedr_client.seedr_handler - seedr-client 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=362ab14a" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">seedr-client 0.1.1 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">seedr-client 0.1.1 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../seedr_client.html">seedr_client package</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <h1>Source code for seedr_client.seedr_handler</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">aria2p</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randrange</span>
+<span class="kn">from</span> <span class="nn">torrentool.api</span> <span class="kn">import</span> <span class="n">Torrent</span>
+<span class="kn">from</span> <span class="nn">.errors</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">InvalidLogin</span><span class="p">,</span>
+    <span class="n">InvalidToken</span><span class="p">,</span>
+    <span class="n">LoginRequired</span><span class="p">,</span>
+    <span class="n">InvalidTorrent</span><span class="p">,</span>
+    <span class="n">DriveLimit</span><span class="p">,</span>
+    <span class="n">BadLeeching</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="SeedrHandler"><a class="viewcode-back" href="../../seedr_client.html#seedr_client.SeedrHandler">[docs]</a><span class="k">class</span> <span class="nc">SeedrHandler</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">email</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">password</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">access_token</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">aria2c_secret</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">download_directory</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rate_limit</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">email</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">password</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">access_token</span> <span class="o">=</span> <span class="n">access_token</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base_folder_url</span> <span class="o">=</span> <span class="s2">&quot;https://www.seedr.cc/api/folder&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base_oauth_url</span> <span class="o">=</span> <span class="s2">&quot;https://www.seedr.cc/oauth_test&quot;</span>
+        <span class="c1"># This is the list of file types Seedr client is not allowed to download,</span>
+        <span class="c1"># alter this to your requirements, or leave blank if you want Seedr clients</span>
+        <span class="c1"># should download all files types</span>
+        <span class="c1"># TODO Replace this argument from environment instead</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exclude_file_type</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;png&quot;</span><span class="p">,</span> <span class="s2">&quot;txt&quot;</span><span class="p">,</span> <span class="s2">&quot;exe&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_token</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">magnet_regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;magnet:\?xt=urn:[a-z0-9]+:[a-zA-Z0-9]</span><span class="si">{32}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">torrent_regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;.*torrent$&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drive_size</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_drive</span><span class="p">()</span>  <span class="c1"># This finishes init of the Seedr client, by setting up the drive size</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rate_limit</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aria2</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aria2c_secret</span> <span class="o">=</span> <span class="n">aria2c_secret</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seedr_download_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;user_agent&quot;</span><span class="p">:</span> <span class="s2">&quot;Mozilla/5.0&quot;</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">download_directory</span> <span class="o">=</span> <span class="n">download_directory</span>
+
+<div class="viewcode-block" id="SeedrHandler.contains_bad_token"><a class="viewcode-back" href="../../seedr_client.html#seedr_client.SeedrHandler.contains_bad_token">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">contains_bad_token</span><span class="p">(</span><span class="n">response_text</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">any</span><span class="p">(</span>
+            <span class="n">fail_resp</span> <span class="ow">in</span> <span class="n">response_text</span>
+            <span class="k">for</span> <span class="n">fail_resp</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;invalid_token&quot;</span><span class="p">,</span> <span class="s2">&quot;expired_token&quot;</span><span class="p">]</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="SeedrHandler.bytes_to_mb_gb"><a class="viewcode-back" href="../../seedr_client.html#seedr_client.SeedrHandler.bytes_to_mb_gb">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">bytes_to_mb_gb</span><span class="p">(</span><span class="n">byte</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A simple function that converts Bytes to Megabytes if value</span>
+<span class="sd">        is less than 1 Gigabyte else returns value in Gigabytes</span>
+
+<span class="sd">        :param byte: The value in Bytes to be converted</span>
+<span class="sd">        :type byte: int</span>
+<span class="sd">        :return: The converted value in MB or GB based on logic</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mb</span> <span class="o">=</span> <span class="n">byte</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mb</span> <span class="o">&gt;=</span> <span class="mi">1024</span><span class="p">:</span>
+            <span class="n">gb</span> <span class="o">=</span> <span class="n">mb</span> <span class="o">/</span> <span class="mi">1024</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">gb</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> GB&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">mb</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> MB&quot;</span></div>
+
+<div class="viewcode-block" id="SeedrHandler.list_contents"><a class="viewcode-back" href="../../seedr_client.html#seedr_client.SeedrHandler.list_contents">[docs]</a>    <span class="k">def</span> <span class="nf">list_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response_json</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method takes the response provided by the api request and sanitizes it,</span>
+<span class="sd">        to only returns the relevant details pertaining to the folder structure</span>
+<span class="sd">        :param response_json: The response from the api requests passed in json format</span>
+<span class="sd">        :type response_json: dict</span>
+<span class="sd">        :return: The folder structure of the folder pertaining to the api response</span>
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;folders&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;folder_id&quot;</span><span class="p">:</span> <span class="n">folder</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;folder_name&quot;</span><span class="p">:</span> <span class="n">folder</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">bytes_to_mb_gb</span><span class="p">(</span><span class="n">folder</span><span class="p">[</span><span class="s2">&quot;size&quot;</span><span class="p">]),</span>
+                <span class="p">}</span>
+                <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="n">response_json</span><span class="p">[</span><span class="s2">&quot;folders&quot;</span><span class="p">]</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;files&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;folder_file_id&quot;</span><span class="p">:</span> <span class="n">file</span><span class="p">[</span><span class="s2">&quot;folder_file_id&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;file_name&quot;</span><span class="p">:</span> <span class="n">file</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">bytes_to_mb_gb</span><span class="p">(</span><span class="n">file</span><span class="p">[</span><span class="s2">&quot;size&quot;</span><span class="p">]),</span>
+                    <span class="s2">&quot;folder_path&quot;</span><span class="p">:</span> <span class="n">response_json</span><span class="p">[</span><span class="s2">&quot;fullname&quot;</span><span class="p">],</span>
+                <span class="p">}</span>
+                <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">response_json</span><span class="p">[</span><span class="s2">&quot;files&quot;</span><span class="p">]</span>
+            <span class="p">],</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">content</span></div>
+
+<div class="viewcode-block" id="SeedrHandler.is_op_success"><a class="viewcode-back" href="../../seedr_client.html#seedr_client.SeedrHandler.is_op_success">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">is_op_success</span><span class="p">(</span><span class="n">response_text</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks if there is a success code in the response provided by the api call and returns the appropriate boolean</span>
+<span class="sd">        :param response_text: The response from the api call in text format</span>
+<span class="sd">        :type response_text: str</span>
+<span class="sd">        :return: Returns true if success, false otherwise</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response_text</span><span class="p">)[</span><span class="s2">&quot;result&quot;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="SeedrHandler.is_login_success"><a class="viewcode-back" href="../../seedr_client.html#seedr_client.SeedrHandler.is_login_success">[docs]</a>    <span class="k">def</span> <span class="nf">is_login_success</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks if the access token is valid</span>
+
+<span class="sd">        :return: Returns True if the token is valid, False if it isn&#39;t</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_folder_url</span><span class="si">}</span><span class="s2">?access_token=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">access_token</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">contains_bad_token</span><span class="p">(</span><span class="n">response_text</span><span class="o">=</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="SeedrHandler.is_request_failed"><a class="viewcode-back" href="../../seedr_client.html#seedr_client.SeedrHandler.is_request_failed">[docs]</a>    <span class="k">def</span> <span class="nf">is_request_failed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response_text</span><span class="p">,</span> <span class="n">requested_on</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks for any failed codes in the response and if there is any, then it raises</span>
+<span class="sd">        the appropriate error code with detail, else returns false</span>
+
+<span class="sd">        :param response_text: The text response received by Seedr api to the request made by the previous method</span>
+<span class="sd">        :type response_text: str</span>
+<span class="sd">        :param requested_on: A string that is either &quot;file&quot; or &quot;folder&quot; based on what kinda file system operations was</span>
+<span class="sd">            going on in the previous method</span>
+<span class="sd">        :type requested_on: str</span>
+<span class="sd">        :return: Returns False if no fail code</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot;access_denied&quot;</span> <span class="ow">in</span> <span class="n">response_text</span><span class="p">:</span>
+            <span class="c1"># TODO add a way to notify when this happens</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">requested_on</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2"> not found in drive&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">contains_bad_token</span><span class="p">(</span><span class="n">response_text</span><span class="o">=</span><span class="n">response_text</span><span class="p">):</span>
+            <span class="c1"># TODO add a way to notify when this happens</span>
+            <span class="k">raise</span> <span class="n">InvalidToken</span><span class="p">(</span><span class="s2">&quot;Invalid/Expired access token.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="SeedrHandler.get_token"><a class="viewcode-back" href="../../seedr_client.html#seedr_client.SeedrHandler.get_token">[docs]</a>    <span class="k">def</span> <span class="nf">get_token</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the access token if email and password is passed during init, else if token itself was provided instead</span>
+<span class="sd">        verifies that the access token is valid and if an error occurs during the previous process or if none of the</span>
+<span class="sd">        required details are passed during init of client raises an error.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;grant_type&quot;</span><span class="p">:</span> <span class="s2">&quot;password&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;client_id&quot;</span><span class="p">:</span> <span class="s2">&quot;seedr_chrome&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;login&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">email</span><span class="p">,</span>
+                <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="p">,</span>
+            <span class="p">}</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_oauth_url</span><span class="si">}</span><span class="s2">/token.php&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s2">&quot;access_token&quot;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">access_token</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)[</span><span class="s2">&quot;access_token&quot;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># TODO add a way to notify when this happens</span>
+                <span class="k">raise</span> <span class="n">InvalidLogin</span><span class="p">(</span><span class="s2">&quot;Invalid username and password combination.&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">access_token</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_login_success</span><span class="p">():</span>
+                <span class="c1"># TODO add a way to notify when this happens</span>
+                <span class="k">raise</span> <span class="n">InvalidToken</span><span class="p">(</span><span class="s2">&quot;Invalid/Expired access token.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># TODO add a way to notify when this happens</span>
+            <span class="k">raise</span> <span class="n">LoginRequired</span><span class="p">(</span><span class="s2">&quot;Account login or token is required.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SeedrHandler.get_drive"><a class="viewcode-back" href="../../seedr_client.html#seedr_client.SeedrHandler.get_drive">[docs]</a>    <span class="k">def</span> <span class="nf">get_drive</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets details about the drive&#39;s space, active torrents, and all downloaded files and folders</span>
+<span class="sd">        Note: This is the same as the get_folder method except seedr api does not ask for a folder id,</span>
+<span class="sd">        additionally we are able top display a few additional details, including active torrents</span>
+
+<span class="sd">        :return: A dictionary containing, available and used drive space, active torrents and its details, downloaded</span>
+<span class="sd">            folders and files and their details</span>
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_folder_url</span><span class="si">}</span><span class="s2">?access_token=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">access_token</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">contains_bad_token</span><span class="p">(</span><span class="n">response_text</span><span class="o">=</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">):</span>
+            <span class="c1"># TODO add a way to notify when this happens</span>
+            <span class="k">raise</span> <span class="n">InvalidToken</span><span class="p">(</span><span class="s2">&quot;Invalid/Expired access token.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">response_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+            <span class="n">drive</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;space&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;total&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">bytes_to_mb_gb</span><span class="p">(</span><span class="n">response_json</span><span class="p">[</span><span class="s2">&quot;space_max&quot;</span><span class="p">]),</span>
+                    <span class="s2">&quot;used&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">bytes_to_mb_gb</span><span class="p">(</span><span class="n">response_json</span><span class="p">[</span><span class="s2">&quot;space_used&quot;</span><span class="p">]),</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;parent_folder_id&quot;</span><span class="p">:</span> <span class="n">response_json</span><span class="p">[</span><span class="s2">&quot;folder_id&quot;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">response_json</span><span class="p">[</span><span class="s2">&quot;parent&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+                <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="s2">&quot;torrents&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">torrent</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
+                        <span class="s2">&quot;torrent_id&quot;</span><span class="p">:</span> <span class="n">torrent</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>
+                        <span class="s2">&quot;progress&quot;</span><span class="p">:</span> <span class="n">torrent</span><span class="p">[</span><span class="s2">&quot;progress&quot;</span><span class="p">],</span>
+                        <span class="s2">&quot;progress_url&quot;</span><span class="p">:</span> <span class="n">torrent</span><span class="p">[</span><span class="s2">&quot;progress_url&quot;</span><span class="p">],</span>
+                    <span class="p">}</span>
+                    <span class="k">for</span> <span class="n">torrent</span> <span class="ow">in</span> <span class="n">response_json</span><span class="p">[</span><span class="s2">&quot;torrents&quot;</span><span class="p">]</span>
+                <span class="p">],</span>
+            <span class="p">}</span>
+            <span class="n">drive</span> <span class="o">=</span> <span class="n">drive</span> <span class="o">|</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_contents</span><span class="p">(</span><span class="n">response_json</span><span class="o">=</span><span class="n">response_json</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">drive_size</span> <span class="o">=</span> <span class="n">response_json</span><span class="p">[</span><span class="s2">&quot;space_max&quot;</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">drive</span></div>
+
+<div class="viewcode-block" id="SeedrHandler.get_folder"><a class="viewcode-back" href="../../seedr_client.html#seedr_client.SeedrHandler.get_folder">[docs]</a>    <span class="k">def</span> <span class="nf">get_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method lists all the content of the folder as a dictionary associated with</span>
+<span class="sd">        the folder id that is passed if it exists</span>
+
+<span class="sd">        :param folder_id: The unique id associated with the folder that you need the info about</span>
+<span class="sd">        :type folder_id: int</span>
+<span class="sd">        :return: A dictionary contains a list of all files and folders in the associated folder</span>
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_folder_url</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">folder_id</span><span class="p">)</span><span class="si">}</span><span class="s2">?access_token=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">access_token</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+        <span class="n">response_text</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_request_failed</span><span class="p">(</span>
+            <span class="n">response_text</span><span class="o">=</span><span class="n">response_text</span><span class="p">,</span> <span class="n">requested_on</span><span class="o">=</span><span class="s2">&quot;folder&quot;</span>
+        <span class="p">):</span>
+            <span class="n">response_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response_text</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">folder_id</span> <span class="o">==</span> <span class="n">response_json</span><span class="p">[</span><span class="s2">&quot;folder_id&quot;</span><span class="p">]:</span>
+                <span class="n">folder</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;folder_name&quot;</span><span class="p">:</span> <span class="n">response_json</span><span class="p">[</span><span class="s2">&quot;fullname&quot;</span><span class="p">]}</span>
+                <span class="n">folder</span> <span class="o">=</span> <span class="n">folder</span> <span class="o">|</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_contents</span><span class="p">(</span><span class="n">response_json</span><span class="o">=</span><span class="n">response_json</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">folder</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># TODO add a way to notify when this happens</span>
+                <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span>
+                    <span class="s2">&quot;Provided folder id does not match the received folder id&quot;</span>
+                <span class="p">)</span></div>
+
+<div class="viewcode-block" id="SeedrHandler.get_file"><a class="viewcode-back" href="../../seedr_client.html#seedr_client.SeedrHandler.get_file">[docs]</a>    <span class="k">def</span> <span class="nf">get_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder_file_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method returns the name and the download url associated with the file id that is passed</span>
+
+<span class="sd">        :param folder_file_id: The unique id associated with the file you need the info about</span>
+<span class="sd">        :type folder_file_id: int</span>
+<span class="sd">        :return: A dictionary containing file name and download url</span>
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;access_token&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">access_token</span><span class="p">,</span>
+            <span class="s2">&quot;func&quot;</span><span class="p">:</span> <span class="s2">&quot;fetch_file&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;folder_file_id&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">folder_file_id</span><span class="p">),</span>
+        <span class="p">}</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_oauth_url</span><span class="si">}</span><span class="s2">/resource.php&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">response_text</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_request_failed</span><span class="p">(</span><span class="n">response_text</span><span class="o">=</span><span class="n">response_text</span><span class="p">,</span> <span class="n">requested_on</span><span class="o">=</span><span class="s2">&quot;file&quot;</span><span class="p">):</span>
+            <span class="n">response_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response_text</span><span class="p">)</span>
+            <span class="n">file</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">response_json</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="s2">&quot;download_url&quot;</span><span class="p">:</span> <span class="n">response_json</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]}</span>
+            <span class="k">return</span> <span class="n">file</span></div>
+
+<div class="viewcode-block" id="SeedrHandler.add_torrent"><a class="viewcode-back" href="../../seedr_client.html#seedr_client.SeedrHandler.add_torrent">[docs]</a>    <span class="k">def</span> <span class="nf">add_torrent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">torrent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">wishlist_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">folder_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function allows you to pass either torrent file or magnet uri or a wishlist id, to start downloading</span>
+<span class="sd">        by Seedr.</span>
+
+<span class="sd">        Note: If magnet uri is passed instead of a torrent file which is the preferred method, and if the peers in the</span>
+<span class="sd">        torrent is lower than 3 or if the torrent is completely dead then this function might not be able to add the</span>
+<span class="sd">        torrent due to the underlying logic which requires the meta info of the torrent. This is a drawback of this</span>
+<span class="sd">        approach as this helps avoid wasting time checking if there is enough storage space, but can&#39;t use the Seedr&#39;s</span>
+<span class="sd">        cache, which works even if there is no seeders. If there is enough requests to correct this approach I will add</span>
+<span class="sd">        a timeout logic to the method in next iteration. For now try supplying torrents file instead of the magnet uri.</span>
+
+<span class="sd">        :param torrent: The torrent file or magnet uri that you want to add to be leeched/downloaded</span>
+<span class="sd">        :type torrent: str</span>
+<span class="sd">        :param wishlist_id: The wishlist id that you want to add from your Seedr wishlist</span>
+<span class="sd">        :type wishlist_id: int</span>
+<span class="sd">        :param folder_id: The folder you want the torrent to be downloaded to. Defaults to parent.</span>
+<span class="sd">        :type folder_id: int</span>
+<span class="sd">        :return: If successful returns the name and ID of the torrent.</span>
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">torrent</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">torrent_regex</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">torrent</span><span class="p">):</span>
+                <span class="k">pass</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnet_regex</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">torrent</span><span class="p">):</span>
+                <span class="c1"># TODO Add a timeout wrapper, which will jump right to adding the torrent instead</span>
+                <span class="n">temp_torrent_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="n">tempfile</span><span class="o">.</span><span class="n">gettempdir</span><span class="p">(),</span> <span class="sa">f</span><span class="s2">&quot;temp</span><span class="si">{</span><span class="n">randrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">)</span><span class="si">:</span><span class="s2">04</span><span class="si">}</span><span class="s2">.torrent&quot;</span>
+                <span class="p">)</span>
+                <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                    <span class="p">[</span><span class="s2">&quot;ih2torrent&quot;</span><span class="p">,</span> <span class="s2">&quot;--file&quot;</span><span class="p">,</span> <span class="n">temp_torrent_file_path</span><span class="p">,</span> <span class="n">torrent</span><span class="p">]</span>
+                <span class="p">)</span>
+                <span class="n">torrent</span> <span class="o">=</span> <span class="n">temp_torrent_file_path</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">InvalidTorrent</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;The torrent passed is invalid, please verify it fix it.</span><span class="se">\n</span><span class="s2">Torrent/Magnet: </span><span class="si">{</span><span class="n">torrent</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+            <span class="n">torrent_info</span> <span class="o">=</span> <span class="n">Torrent</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">torrent</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">drive_size</span> <span class="o">&gt;=</span> <span class="n">torrent_info</span><span class="o">.</span><span class="n">total_size</span><span class="p">:</span>
+                <span class="n">torrent_magnet_uri</span> <span class="o">=</span> <span class="n">torrent_info</span><span class="o">.</span><span class="n">magnet_link</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">drive_size</span><span class="p">,</span> <span class="n">torrent_info</span><span class="o">.</span><span class="n">total_size</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">DriveLimit</span><span class="p">(</span>
+                    <span class="s2">&quot;The torrent is larger than the total available space in the drive&quot;</span>
+                <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">wishlist_id</span><span class="p">:</span>
+            <span class="n">torrent_magnet_uri</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;add_torrent() is missing an argument. At least one argument needs to be passed&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;access_token&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">access_token</span><span class="p">,</span>
+            <span class="s2">&quot;func&quot;</span><span class="p">:</span> <span class="s2">&quot;add_torrent&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;torrent_magnet&quot;</span><span class="p">:</span> <span class="n">torrent_magnet_uri</span><span class="p">,</span>
+            <span class="s2">&quot;wishlist_id&quot;</span><span class="p">:</span> <span class="n">wishlist_id</span><span class="p">,</span>
+            <span class="s2">&quot;folder_id&quot;</span><span class="p">:</span> <span class="n">folder_id</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_oauth_url</span><span class="si">}</span><span class="s2">/resource.php&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">response_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">response_json</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s2">&quot;torrent_id&quot;</span><span class="p">:</span> <span class="n">response_json</span><span class="p">[</span><span class="s2">&quot;user_torrent_id&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;file_name&quot;</span><span class="p">:</span> <span class="n">response_json</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">],</span>
+            <span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">BadLeeching</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;The provided Torrent couldn&#39;t be leeched/downloaded to the drive.</span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">data</span><span class="si">=}</span><span class="s2">&quot;</span>
+            <span class="p">)</span></div>
+
+<div class="viewcode-block" id="SeedrHandler.download_folder"><a class="viewcode-back" href="../../seedr_client.html#seedr_client.SeedrHandler.download_folder">[docs]</a>    <span class="k">def</span> <span class="nf">download_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder_id</span><span class="p">,</span> <span class="n">builtin_downloader</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_folder</span><span class="p">(</span><span class="n">folder_id</span><span class="o">=</span><span class="n">folder_id</span><span class="p">)</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rate_limit</span><span class="p">)</span>
+        <span class="n">download_list</span> <span class="o">=</span> <span class="n">content</span><span class="p">[</span><span class="s2">&quot;files&quot;</span><span class="p">]</span>
+        <span class="n">next_list_folders</span> <span class="o">=</span> <span class="n">content</span><span class="p">[</span><span class="s2">&quot;folders&quot;</span><span class="p">]</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">next_list_folders</span><span class="p">:</span>
+                <span class="n">temp_list_folders</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="n">next_list_folders</span><span class="p">:</span>
+                    <span class="n">subfolder_content</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_folder</span><span class="p">(</span><span class="n">folder_id</span><span class="o">=</span><span class="n">folder</span><span class="p">[</span><span class="s2">&quot;folder_id&quot;</span><span class="p">])</span>
+                    <span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rate_limit</span><span class="p">)</span>
+                    <span class="n">temp_list_folders</span> <span class="o">+=</span> <span class="n">subfolder_content</span><span class="p">[</span><span class="s2">&quot;folders&quot;</span><span class="p">]</span>
+                    <span class="n">download_list</span> <span class="o">+=</span> <span class="n">subfolder_content</span><span class="p">[</span><span class="s2">&quot;files&quot;</span><span class="p">]</span>
+                <span class="n">next_list_folders</span> <span class="o">=</span> <span class="n">temp_list_folders</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="c1"># This loop checks if there is any file that matches the list of extensions that are to be excluded and if</span>
+        <span class="c1"># present will remove them from the list</span>
+        <span class="n">temp_download_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">download_list</span><span class="p">:</span>
+            <span class="n">temp_item_ext</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;file_name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">temp_item_ext</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">exclude_file_type</span><span class="p">:</span>
+                <span class="n">item</span><span class="p">[</span><span class="s2">&quot;folder_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">download_directory</span><span class="p">,</span> <span class="o">*</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;folder_path&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">),</span> <span class="s2">&quot;&quot;</span>
+                <span class="p">)</span>
+                <span class="n">temp_download_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="n">download_list</span> <span class="o">=</span> <span class="n">temp_download_list</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">download_list</span><span class="p">)):</span>
+            <span class="n">download_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;download_url&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_file</span><span class="p">(</span>
+                <span class="n">download_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;folder_file_id&quot;</span><span class="p">]</span>
+            <span class="p">)[</span><span class="s2">&quot;download_url&quot;</span><span class="p">]</span>
+            <span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rate_limit</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">builtin_downloader</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">download_list</span>
+        <span class="n">download_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">download_list</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;size&quot;</span><span class="p">])</span>
+        <span class="c1"># Only runs if aria2p client hasn&#39;t already been initiated</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">aria2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">aria2</span> <span class="o">=</span> <span class="n">aria2p</span><span class="o">.</span><span class="n">API</span><span class="p">(</span>
+                <span class="n">aria2p</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span>
+                    <span class="n">host</span><span class="o">=</span><span class="s2">&quot;http://localhost&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">6800</span><span class="p">,</span> <span class="n">secret</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">aria2c_secret</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="n">download_queue</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Adds each url obtained from previous steps one by one with priorities given for smallest files first</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">download_list</span><span class="p">)):</span>
+            <span class="n">download_adder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">aria2</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+                <span class="n">uri</span><span class="o">=</span><span class="n">download_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;download_url&quot;</span><span class="p">],</span>
+                <span class="c1"># TODO make the directory data dynamic, such that each file is downloaded to the appropriate folder</span>
+                <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;dir&quot;</span><span class="p">:</span> <span class="n">download_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;folder_path&quot;</span><span class="p">]},</span>
+                <span class="n">position</span><span class="o">=</span><span class="n">i</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">download_queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">download_adder</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">gid</span><span class="p">)</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="c1"># TODO FUTURE show progress real time</span>
+            <span class="n">temp_download_queue</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">gid</span> <span class="ow">in</span> <span class="n">download_queue</span><span class="p">:</span>
+                <span class="n">download_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">aria2</span><span class="o">.</span><span class="n">get_download</span><span class="p">(</span><span class="n">gid</span><span class="o">=</span><span class="n">gid</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">download_info</span><span class="o">.</span><span class="n">is_complete</span><span class="p">:</span>
+                    <span class="n">temp_download_queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gid</span><span class="p">)</span>
+            <span class="n">download_queue</span> <span class="o">=</span> <span class="n">temp_download_queue</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">download_queue</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+        <span class="c1"># TODO return parent directory instead</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="SeedrHandler.delete_folder"><a class="viewcode-back" href="../../seedr_client.html#seedr_client.SeedrHandler.delete_folder">[docs]</a>    <span class="k">def</span> <span class="nf">delete_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method deletes the folder associated with the id that is passed and returns True on success</span>
+
+<span class="sd">        :param folder_id: The id of the folder you wish to delete</span>
+<span class="sd">        :type folder_id: int</span>
+<span class="sd">        :return: Returns True or False based on success</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;access_token&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">access_token</span><span class="p">,</span>
+            <span class="s2">&quot;func&quot;</span><span class="p">:</span> <span class="s2">&quot;delete&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;delete_arr&quot;</span><span class="p">:</span> <span class="s1">&#39;[{&quot;type&quot;:&quot;folder&quot;,&quot;id&quot;:&quot;&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">folder_id</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;&quot;}]&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="c1"># TODO Correct this stub to follow DRY</span>
+        <span class="c1"># TODO add a conditional statement to prevent deletion of parent folder</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_oauth_url</span><span class="si">}</span><span class="s2">/resource.php&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">response_text</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_request_failed</span><span class="p">(</span>
+            <span class="n">response_text</span><span class="o">=</span><span class="n">response_text</span><span class="p">,</span> <span class="n">requested_on</span><span class="o">=</span><span class="s2">&quot;folder&quot;</span>
+        <span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_op_success</span><span class="p">(</span><span class="n">response_text</span><span class="o">=</span><span class="n">response_text</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SeedrHandler.delete_file"><a class="viewcode-back" href="../../seedr_client.html#seedr_client.SeedrHandler.delete_file">[docs]</a>    <span class="k">def</span> <span class="nf">delete_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder_file_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method deletes the file associated with the id that is passed and returns True on success</span>
+
+<span class="sd">        :param folder_file_id: The id of the file you wish to delete</span>
+<span class="sd">        :type folder_file_id: int</span>
+<span class="sd">        :return: Returns True or False based on success</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;access_token&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">access_token</span><span class="p">,</span>
+            <span class="s2">&quot;func&quot;</span><span class="p">:</span> <span class="s2">&quot;delete&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;delete_arr&quot;</span><span class="p">:</span> <span class="s1">&#39;[{&quot;type&quot;:&quot;file&quot;,&quot;id&quot;:&quot;&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">folder_file_id</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;&quot;}]&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="c1"># TODO Correct this stub to follow DRY</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_oauth_url</span><span class="si">}</span><span class="s2">/resource.php&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">response_text</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_request_failed</span><span class="p">(</span><span class="n">response_text</span><span class="o">=</span><span class="n">response_text</span><span class="p">,</span> <span class="n">requested_on</span><span class="o">=</span><span class="s2">&quot;file&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_op_success</span><span class="p">(</span><span class="n">response_text</span><span class="o">=</span><span class="n">response_text</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SeedrHandler.delete_torrent"><a class="viewcode-back" href="../../seedr_client.html#seedr_client.SeedrHandler.delete_torrent">[docs]</a>    <span class="k">def</span> <span class="nf">delete_torrent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">torrent_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method deletes any active torrent associated with the id that is passed and returns True on success</span>
+
+<span class="sd">        :param torrent_id: The id of the active torrent you wish to delete</span>
+<span class="sd">        :type torrent_id: int</span>
+<span class="sd">        :return: Returns True or False based on success</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;access_token&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">access_token</span><span class="p">,</span>
+            <span class="s2">&quot;func&quot;</span><span class="p">:</span> <span class="s2">&quot;delete&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;delete_arr&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;[</span><span class="se">{{</span><span class="s1">&quot;type&quot;:&quot;torrent&quot;,&quot;id&quot;:</span><span class="si">{</span><span class="n">torrent_id</span><span class="si">}</span><span class="se">}}</span><span class="s1">]&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_oauth_url</span><span class="si">}</span><span class="s2">/resource.php&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">response_text</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_request_failed</span><span class="p">(</span>
+            <span class="n">response_text</span><span class="o">=</span><span class="n">response_text</span><span class="p">,</span> <span class="n">requested_on</span><span class="o">=</span><span class="s2">&quot;torrent&quot;</span>
+        <span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_op_success</span><span class="p">(</span><span class="n">response_text</span><span class="o">=</span><span class="n">response_text</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SeedrHandler.delete_all"><a class="viewcode-back" href="../../seedr_client.html#seedr_client.SeedrHandler.delete_all">[docs]</a>    <span class="k">def</span> <span class="nf">delete_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method deletes all the content within the drive, whether it downloaded</span>
+<span class="sd">        to the drive or being downloaded.</span>
+
+<span class="sd">        :return: Returns True if the method clears the whole drive successfully, False otherwise.</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_drive</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="n">content</span><span class="p">[</span><span class="s2">&quot;folders&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">delete_folder</span><span class="p">(</span><span class="n">folder</span><span class="p">[</span><span class="s2">&quot;folder_id&quot;</span><span class="p">])</span>
+            <span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rate_limit</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">content</span><span class="p">[</span><span class="s2">&quot;files&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">delete_file</span><span class="p">(</span><span class="n">file</span><span class="p">[</span><span class="s2">&quot;folder_file_id&quot;</span><span class="p">])</span>
+            <span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rate_limit</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">torrent</span> <span class="ow">in</span> <span class="n">content</span><span class="p">[</span><span class="s2">&quot;torrents&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">delete_torrent</span><span class="p">(</span><span class="n">torrent</span><span class="p">[</span><span class="s2">&quot;torrent_id&quot;</span><span class="p">])</span>
+            <span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rate_limit</span><span class="p">)</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_drive</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">content</span><span class="p">[</span><span class="s2">&quot;space&quot;</span><span class="p">][</span><span class="s2">&quot;used&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;0.0 GB&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div></div>
+</pre></div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Mr Developer X
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=87f11076"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>
+    </body>
+</html>
