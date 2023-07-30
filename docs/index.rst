@@ -15,6 +15,12 @@ Content
 
    modules
 
+Installation
+------------
+
+.. code-block:: shell
+
+   pip install SeedrClient
 
 
 Example Usage

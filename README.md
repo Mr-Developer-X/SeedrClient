@@ -7,6 +7,11 @@ the API.
 It is based on [@theabbie](https://github.com/theabbie/seedr-api) and
 [@hemantapkh](https://github.com/hemantapkh/seedrcc) work.
 
+### Installation
+```shell
+pip install SeedrClient
+```
+
 ### Example code
 ```python
 from seedr_client import SeedrHandler
