@@ -13,7 +13,6 @@ Content
 .. toctree::
    :maxdepth: 3
 
-   Project Homepage <https://github.com/Mr-Developer-X/SeedrClient>
    modules
 
 
