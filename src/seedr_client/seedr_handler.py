@@ -271,7 +271,9 @@ class SeedrHandler:
             file = {"name": response_json["name"], "download_url": response_json["url"]}
             return file
 
-    def add_torrent(self, torrent=None, wishlist_id=None, folder_id=-1):
+    def add_torrent(
+        self, torrent=None, wishlist_id=None, folder_id=-1, check_size=True
+    ):
         """
         This function allows you to pass either torrent file or magnet uri or a wishlist id, to start downloading
         by Seedr.
@@ -289,33 +291,48 @@ class SeedrHandler:
         :type wishlist_id: int
         :param folder_id: The folder you want the torrent to be downloaded to. Defaults to parent.
         :type folder_id: int
+        :param check_size: Used to inform function if checking of Seedr drive space with torrent size is
+            required or not. By default, it checks the torrent size with drive size and raise error if torrent
+            size is larger than drive size.
+        :type check_size: bool
         :return: If successful returns the name and ID of the torrent.
         :rtype: dict
         """
         if torrent:
-            if self.torrent_regex.match(torrent):
-                pass
-            elif self.magnet_regex.match(torrent):
-                # TODO Add a timeout wrapper, which will jump right to adding the torrent instead
-                temp_torrent_file_path = os.path.join(
-                    tempfile.gettempdir(), f"temp{randrange(1, 10**4):04}.torrent"
-                )
-                subprocess.run(
-                    ["ih2torrent", "--file", temp_torrent_file_path, torrent]
-                )
-                torrent = temp_torrent_file_path
+            if check_size:
+                if self.torrent_regex.match(torrent):
+                    pass
+                elif self.magnet_regex.match(torrent):
+                    # TODO Add a timeout wrapper, which will jump right to adding the torrent instead
+                    temp_torrent_file_path = os.path.join(
+                        tempfile.gettempdir(), f"temp{randrange(1, 10**4):04}.torrent"
+                    )
+                    subprocess.run(
+                        ["ih2torrent", "--file", temp_torrent_file_path, torrent]
+                    )
+                    torrent = temp_torrent_file_path
+                else:
+                    raise InvalidTorrent(
+                        f"The torrent passed is invalid, please verify it fix it.\nTorrent/Magnet: {torrent}"
+                    )
+                torrent_info = Torrent.from_file(torrent)
+                if self.drive_size >= torrent_info.total_size:
+                    torrent_magnet_uri = torrent_info.magnet_link
+                else:
+                    print(self.drive_size, torrent_info.total_size)
+                    raise DriveLimit(
+                        "The torrent is larger than the total available space in the drive"
+                    )
             else:
-                raise InvalidTorrent(
-                    f"The torrent passed is invalid, please verify it fix it.\nTorrent/Magnet: {torrent}"
-                )
-            torrent_info = Torrent.from_file(torrent)
-            if self.drive_size >= torrent_info.total_size:
-                torrent_magnet_uri = torrent_info.magnet_link
-            else:
-                print(self.drive_size, torrent_info.total_size)
-                raise DriveLimit(
-                    "The torrent is larger than the total available space in the drive"
-                )
+                if self.torrent_regex.match(torrent):
+                    torrent_info = Torrent.from_file(torrent)
+                    torrent_magnet_uri = torrent_info.magnet_link
+                elif self.magnet_regex.match(torrent):
+                    torrent_magnet_uri = torrent
+                else:
+                    raise InvalidTorrent(
+                        f"The torrent passed is invalid, please verify it fix it.\nTorrent/Magnet: {torrent}"
+                    )
         elif wishlist_id:
             torrent_magnet_uri = None
         else:
