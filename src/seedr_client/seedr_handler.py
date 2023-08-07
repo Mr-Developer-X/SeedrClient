@@ -295,7 +295,7 @@ class SeedrHandler:
             required or not. By default, it checks the torrent size with drive size and raise error if torrent
             size is larger than drive size.
         :type check_size: bool
-        :return: If successful returns the name and ID of the torrent.
+        :return: If successful returns the name, ID and progress url of  the torrent.
         :rtype: dict
         """
         if torrent:
@@ -350,10 +350,18 @@ class SeedrHandler:
 
         response = requests.post(f"{self.base_oauth_url}/resource.php", data=data)
         response_json = json.loads(response.text)
+        sleep(self.rate_limit)
+        current_drive_content = self.get_drive()
+        torrents_active = current_drive_content["torrents"]
+        progress_url = None
+        for torrent in torrents_active:
+            if torrent["torrent_id"] == response_json["user_torrent_id"]:
+                progress_url = torrent["progress_url"]
         if response_json["result"]:
             return {
                 "torrent_id": response_json["user_torrent_id"],
                 "file_name": response_json["title"],
+                "progress_url": progress_url,
             }
         else:
             raise BadLeeching(
