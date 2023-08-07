@@ -354,15 +354,19 @@ class SeedrHandler:
         current_drive_content = self.get_drive()
         torrents_active = current_drive_content["torrents"]
         progress_url = None
-        for torrent in torrents_active:
-            if torrent["torrent_id"] == response_json["user_torrent_id"]:
-                progress_url = torrent["progress_url"]
         if response_json["result"]:
-            return {
-                "torrent_id": response_json["user_torrent_id"],
-                "file_name": response_json["title"],
-                "progress_url": progress_url,
-            }
+            for torrent in torrents_active:
+                if torrent["torrent_id"] == response_json["user_torrent_id"]:
+                    progress_url = torrent["progress_url"]
+            if progress_url is None:
+                for folder in current_drive_content["folders"]:
+                    if folder["folder_name"] == response_json["title"]:
+                        progress_url = "completed"
+                return {
+                    "torrent_id": response_json["user_torrent_id"],
+                    "file_name": response_json["title"],
+                    "progress_url": progress_url,
+                }
         else:
             raise BadLeeching(
                 f"The provided Torrent couldn't be leeched/downloaded to the drive.\n {data=}"
