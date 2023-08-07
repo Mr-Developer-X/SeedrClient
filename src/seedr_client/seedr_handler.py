@@ -295,7 +295,8 @@ class SeedrHandler:
             required or not. By default, it checks the torrent size with drive size and raise error if torrent
             size is larger than drive size.
         :type check_size: bool
-        :return: If successful returns the name, ID and progress url of  the torrent.
+        :return: If successful returns the name, ID and progress url(returns completed incase the download has already
+            completed and there is no url to present) of  the torrent.
         :rtype: dict
         """
         if torrent:
@@ -362,11 +363,11 @@ class SeedrHandler:
                 for folder in current_drive_content["folders"]:
                     if folder["folder_name"] == response_json["title"]:
                         progress_url = "completed"
-                return {
-                    "torrent_id": response_json["user_torrent_id"],
-                    "file_name": response_json["title"],
-                    "progress_url": progress_url,
-                }
+            return {
+                "torrent_id": response_json["user_torrent_id"],
+                "file_name": response_json["title"],
+                "progress_url": progress_url,
+            }
         else:
             raise BadLeeching(
                 f"The provided Torrent couldn't be leeched/downloaded to the drive.\n {data=}"
