@@ -374,6 +374,20 @@ class SeedrHandler:
             )
 
     def download_folder(self, folder_id, builtin_downloader=True):
+        """
+        This function either downloads the entire folder excluding any extensions that are bared or returns a list of
+        files with their exact order and download url.
+
+        :param folder_id: The ID of the folder you would like to download
+        :type folder_id: int
+        :param builtin_downloader: This is to inform the function if you would like SeedrClient to download the folder
+            all by itself or wish to just get a dictionary of files and their information so that you can download them
+            yourself.
+        :type builtin_downloader: bool
+        :return: Returns a dict if builtin_downloader is set to False or returns True after completing the download of
+            the folder.
+        :rtype: Union[dict, bool]
+        """
         content = self.get_folder(folder_id=folder_id)
         sleep(self.rate_limit)
         download_list = content["files"]
